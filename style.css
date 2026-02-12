@@ -111,23 +111,41 @@ body, p, ul, ol, li, table, th, td, div {
     font-weight: bold !important;
 }
 
-/* h5 */
-.markdown-body h5 {
-  position: relative;
-  display: block;
-  padding: 0.6em;
-  margin: 1.0em 0 0.6em;
-  background: #e0edff;
-  color: #111;
-  line-height: 1.4;
-}
-
+/* ============================
+ * 追加（PDF/印刷の文字欠け・文字化け対策）
+ * - PDF出力エンジンが外部TTF(@font-face)を読み込めない場合があるため、
+ *   印刷/PDF時のみシステムフォントへ強制切替して安定化する
+ * ============================ */
 @media print {
-  .markdown-body h5::after {
-    content: none !important;
-    display: none !important;
+  html,
+  body,
+  .markdown-body,
+  .markdown-body * {
+    font-family: "Yu Gothic", "Meiryo", "Hiragino Kaku Gothic ProN",
+      "Noto Sans JP", sans-serif !important;
   }
 
+  .markdown-body pre > code,
+  .markdown-body code,
+  .markdown-body tt,
+  .markdown-body samp {
+    font-family: "Yu Gothic", "Meiryo", "Hiragino Kaku Gothic ProN",
+      "Noto Sans JP", monospace !important;
+  }
+}
+
+/* ============================
+ * 追加（PDF/印刷時の裁切り予防）
+ * - PDF出力でoverflow/改ページ境界の影響で要素が欠けるケースがあるため安全側に寄せる
+ * ============================ */
+@media print {
+  html,
+  body {
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  /* 見出しブロックがページ境界で切れないようにする（特にh5相当の装飾ブロック向け） */
   .markdown-body h5 {
     break-inside: avoid;
     page-break-inside: avoid;
