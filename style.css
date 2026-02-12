@@ -23,61 +23,61 @@
 }
 
 .markdown-body pre {
-    position: relative;
-    background-color: #2d2d2d;
-    border-radius: 8px;
-    padding: 2em 1em 1em 1em;
-    margin: 1.5em 0;
-    overflow: visible;
+  position: relative;
+  background-color: #2d2d2d;
+  border-radius: 8px;
+  padding: 2em 1em 1em 1em;
+  margin: 1.5em 0;
+  overflow: visible;
 }
 
 .markdown-body pre > code, .markdown-body samp, .markdown-body tt {
-    font-family: 'IPAexMincho', serif;
-    font-size: 12px;
-    color: #1fb85a !important;
-    white-space: pre-wrap !important;
-    display: block;
-    white-space: pre-wrap;
-    line-height: 1.5;
+  font-family: 'IPAexMincho', serif;
+  font-size: 12px;
+  color: #1fb85a !important;
+  white-space: pre-wrap !important;
+  display: block;
+  white-space: pre-wrap;
+  line-height: 1.5;
 }
 
 table tr th, table tr td {
-    border-top:1px solid #e6e6e6;
-    border-right:1px solid #e6e6e6;
-    border-bottom:1px solid #e6e6e6;
-    border-left:1px solid #e6e6e6;
+  border-top: 1px solid #e6e6e6;
+  border-right: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  border-left: 1px solid #e6e6e6;
 }
 
 img {
-    max-width: 680px !important;
-    height: auto;
+  max-width: 680px !important;
+  height: auto;
 }
 
 li p img {
-    max-width: 650px !important;
-    height: auto;
+  max-width: 650px !important;
+  height: auto;
 }
 
 h1 {
-    font-size: 20px !important;
+  font-size: 20px !important;
 }
 
 h2 {
-    font-size: 16px !important;
+  font-size: 16px !important;
 }
 
 body, p, ul, ol, li, table, th, td, div {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .cover-page {
-    padding: 20px;
+  padding: 20px;
 }
 
 .company-head {
-    float: right;
-    width: 180px;
-    text-align: right;
+  float: right;
+  width: 180px;
+  text-align: right;
 }
 
 .company-logo {
@@ -89,34 +89,33 @@ body, p, ul, ol, li, table, th, td, div {
 }
 
 .company-name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .line {
-    border-top: 1px solid #77aedd;
-    margin-top: 80px;
-    margin-bottom: 10px;
-    clear: both;
+  border-top: 1px solid #77aedd;
+  margin-top: 80px;
+  margin-bottom: 10px;
+  clear: both;
 }
 
 .creator-info {
-    text-align: left;
-    font-weight: bold;
+  text-align: left;
+  font-weight: bold;
 }
 
 .version {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .title-style {
-    font-size: 24px !important;
-    font-weight: bold !important;
+  font-size: 24px !important;
+  font-weight: bold !important;
 }
 
 /* ============================
- * 追加：文字化け根絶（画面/印刷 共通）
- * - IPAexMincho（外部TTF）が選ばれるとPDF出力で文字化けすることがあるため、
- *   常にシステムフォントを優先させる（!importantで強制）
+ * 文字化け対策（画面/印刷 共通）
+ * - 外部TTFがPDF出力で不安定なため、常にシステムフォントを優先
  * ============================ */
 html,
 body,
@@ -126,7 +125,7 @@ body,
     "Noto Sans JP", sans-serif !important;
 }
 
-/* 追加：コード系も必ず上書き（IPAexMincho参照を潰す） */
+/* コード系も必ず上書き（外部TTF参照を抑止） */
 .markdown-body pre > code,
 .markdown-body code,
 .markdown-body tt,
@@ -136,21 +135,26 @@ body,
 }
 
 /* ============================
- * 追加：@pageのページ領域指定はChrome印刷で未対応が多い
- * - レイアウト/フォントがおかしくなることがあるため、強制的に無効化する
+ * h5 の三角形（疑似要素）を無効化
+ * - 重なり/裁切りを防止
  * ============================ */
-@page {
-  margin-top: 1cm;
-  margin-right: 1.2cm;
-  margin-bottom: 1cm;
-  margin-left: 1.2cm;
+.markdown-body h5::after {
+  content: none !important;
+  display: none !important;
 }
 
+/* ============================
+ * 印刷時の裁切り予防
+ * ============================ */
 @media print {
-  /* PDF出力時のみ三角形を無効化 */
-  .markdown-body h5::after {
-    content: none !important;
-    display: none !important;
+  html,
+  body {
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  .markdown-body h5 {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 }
-
