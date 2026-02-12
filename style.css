@@ -110,17 +110,48 @@ body, p, ul, ol, li, table, th, td, div {
     font-weight: bold !important;
 }
 
-/* h5 の三角（疑似要素）を完全に無効化 */
+/* ---- PDF overlap fix ---- */
+.markdown-body { line-height: 1.65 !important; }
+
+.markdown-body th,
+.markdown-body td,
+.markdown-body p,
+.markdown-body li {
+  line-height: 1.6 !important;
+  overflow: visible !important;
+}
+
+.markdown-body .anchor,
+.markdown-body .octicon,
+.markdown-body .octicon-link {
+  display: none !important;
+}
+
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  position: static !important;
+  overflow: visible !important;
+}
+
+.markdown-body h5,
+.markdown-body h5 * {
+  font-family: 'Yu Gothic', 'Meiryo', 'Noto Sans CJK JP', 'IPAexMincho', sans-serif !important;
+  font-weight: 400 !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: 0 !important;
+}
+
 .markdown-body h5:after,
 .markdown-body h5::after,
 h5:after,
 h5::after {
-    content: normal !important;   /* 疑似要素を生成しない */
-    display: none !important;     /* 念のため非表示 */
-    position: static !important;  /* 既存の absolute を潰す */
-    top: auto !important;
-    left: auto !important;
-    border: 0 !important;
-    width: 0 !important;
-    height: 0 !important;
+  content: none !important;
+  display: none !important;
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  border: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
 }
