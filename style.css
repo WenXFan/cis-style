@@ -118,9 +118,17 @@ body, p, ul, ol, li, table, th, td, div {
 .markdown-body h5:after,
 h5::after,
 h5:after {
-    content: none !important;
+    /* content: none !important;
     display: none !important;
     border: 0 !important;
     width: 0 !important;
-    height: 0 !important;
+    height: 0 !important; */
+    position: none !important;
+    content: "";
+    top: 0;
+    left: 0;
+    border: 0 !important;
+    border-top: 0 !important;
+    width: 0;
+    height: 0;
 }
