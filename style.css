@@ -114,38 +114,35 @@ body, p, ul, ol, li, table, th, td, div {
 }
 
 /* ============================
- * 追加（PDF/印刷の文字欠け・文字化け対策）
- * - window.print() のPDF出力で外部TTFが不安定なため、印刷時はシステムフォントへ強制
+ * 追加：文字化け根絶（画面/印刷 共通）
+ * - IPAexMincho（外部TTF）が選ばれるとPDF出力で文字化けすることがあるため、
+ *   常にシステムフォントを優先させる（!importantで強制）
  * ============================ */
-@media print {
-  /* PDF出力は @media print が確実に適用されるので、ここで全量上書き */
-  html,
-  body,
-  .markdown-body,
-  .markdown-body * {
-    font-family: "Yu Gothic", "Meiryo", "Hiragino Kaku Gothic ProN",
-      "Noto Sans JP", sans-serif !important;
-  }
-
-  /* コード系も必ず上書き（IPAexMincho参照を潰す） */
-  .markdown-body pre > code,
-  .markdown-body code,
-  .markdown-body tt,
-  .markdown-body samp {
-    font-family: "Yu Gothic", "Meiryo", "Hiragino Kaku Gothic ProN",
-      "Noto Sans JP", monospace !important;
-  }
-
-  /* 裁切り予防 */
-  html,
-  body {
-    overflow: visible !important;
-    background: #fff !important;
-  }
-
-  /* 見出しブロックがページ境界で切れないようにする */
-  .markdown-body h5 {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
+html,
+body,
+.markdown-body,
+.markdown-body * {
+  font-family: "Yu Gothic", "Meiryo", "Hiragino Kaku Gothic ProN",
+    "Noto Sans JP", sans-serif !important;
 }
+
+/* 追加：コード系も必ず上書き（IPAexMincho参照を潰す） */
+.markdown-body pre > code,
+.markdown-body code,
+.markdown-body tt,
+.markdown-body samp {
+  font-family: "Yu Gothic", "Meiryo", "Hiragino Kaku Gothic ProN",
+    "Noto Sans JP", monospace !important;
+}
+
+/* ============================
+ * 追加：@pageのページ領域指定はChrome印刷で未対応が多い
+ * - レイアウト/フォントがおかしくなることがあるため、強制的に無効化する
+ * ============================ */
+@page {
+  margin-top: 1cm;
+  margin-right: 1.2cm;
+  margin-bottom: 1cm;
+  margin-left: 1.2cm;
+}
+
