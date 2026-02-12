@@ -146,3 +146,11 @@ body,
   margin-left: 1.2cm;
 }
 
+@media print {
+  /* PDF出力時のみ三角形を無効化 */
+  .markdown-body h5::after {
+    content: none !important;
+    display: none !important;
+  }
+}
+
