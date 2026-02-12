@@ -9,8 +9,6 @@
   margin-bottom: 1cm;
   margin-left: 1.2cm;
 
-  /* Chrome の印刷(PDF)では未対応のため無効化（文字化け/崩れ回避） */
-  /*
   @bottom-left {
       content: "ﾂｩ Unified Services, Inc. All Rights Reserved.";
       font-size: 10px;
@@ -19,65 +17,64 @@
       content: "Page " counter(page) " of " counter(pages);
       font-size: 10px;
   }
-  */
 }
 
 .markdown-body pre {
-  position: relative;
-  background-color: #2d2d2d;
-  border-radius: 8px;
-  padding: 2em 1em 1em 1em;
-  margin: 1.5em 0;
-  overflow: visible;
+    position: relative;
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    padding: 2em 1em 1em 1em;
+    margin: 1.5em 0;
+    overflow: visible;
 }
 
 .markdown-body pre > code, .markdown-body samp, .markdown-body tt {
-  font-family: 'IPAexMincho', serif;
-  font-size: 12px;
-  color: #1fb85a !important;
-  white-space: pre-wrap !important;
-  display: block;
-  white-space: pre-wrap;
-  line-height: 1.5;
+    font-family: 'IPAexMincho', serif;
+    font-size: 12px;
+    color: #1fb85a !important;
+    white-space: pre-wrap !important;
+    display: block;
+    white-space: pre-wrap;
+    line-height: 1.5;
 }
 
 table tr th, table tr td {
-  border-top: 1px solid #e6e6e6;
-  border-right: 1px solid #e6e6e6;
-  border-bottom: 1px solid #e6e6e6;
-  border-left: 1px solid #e6e6e6;
+    border-top:1px solid #e6e6e6;
+    border-right:1px solid #e6e6e6;
+    border-bottom:1px solid #e6e6e6;
+    border-left:1px solid #e6e6e6;
 }
 
 img {
-  max-width: 680px !important;
-  height: auto;
+    max-width: 680px !important;
+    height: auto;
 }
 
 li p img {
-  max-width: 650px !important;
-  height: auto;
+    max-width: 650px !important;
+    height: auto;
 }
 
 h1 {
-  font-size: 20px !important;
+    font-size: 20px !important;
 }
 
 h2 {
-  font-size: 16px !important;
+    font-size: 16px !important;
 }
 
 body, p, ul, ol, li, table, th, td, div {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 .cover-page {
-  padding: 20px;
+    padding: 20px;
 }
 
 .company-head {
-  float: right;
-  width: 180px;
-  text-align: right;
+    float: right;
+    width: 180px;
+    text-align: right;
 }
 
 .company-logo {
@@ -89,72 +86,41 @@ body, p, ul, ol, li, table, th, td, div {
 }
 
 .company-name {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .line {
-  border-top: 1px solid #77aedd;
-  margin-top: 80px;
-  margin-bottom: 10px;
-  clear: both;
+    border-top: 1px solid #77aedd;
+    margin-top: 80px;
+    margin-bottom: 10px;
+    clear: both;
 }
 
 .creator-info {
-  text-align: left;
-  font-weight: bold;
+    text-align: left;
+    font-weight: bold;
 }
 
 .version {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 .title-style {
-  font-size: 24px !important;
-  font-weight: bold !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
 }
 
 /* ============================
- * 文字化け対策（画面/印刷 共通）
- * - 外部TTFがPDF出力で不安定なため、常にシステムフォントを優先
+ * 追加：h5 の吹き出し三角形を削除（PDF出力時の重なり防止）
+ * - 既存CSS側で h5::after / h5:after が定義されている前提で無効化する
  * ============================ */
-html,
-body,
-.markdown-body,
-.markdown-body * {
-  font-family: "Yu Gothic", "Meiryo", "Hiragino Kaku Gothic ProN",
-    "Noto Sans JP", sans-serif !important;
-}
-
-/* コード系も必ず上書き（外部TTF参照を抑止） */
-.markdown-body pre > code,
-.markdown-body code,
-.markdown-body tt,
-.markdown-body samp {
-  font-family: "Yu Gothic", "Meiryo", "Hiragino Kaku Gothic ProN",
-    "Noto Sans JP", monospace !important;
-}
-
-/* ============================
- * h5 の三角形（疑似要素）を無効化
- * - 重なり/裁切りを防止
- * ============================ */
-.markdown-body h5::after {
-  content: none !important;
-  display: none !important;
-}
-
-/* ============================
- * 印刷時の裁切り予防
- * ============================ */
-@media print {
-  html,
-  body {
-    overflow: visible !important;
-    background: #fff !important;
-  }
-
-  .markdown-body h5 {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
+.markdown-body h5::after,
+.markdown-body h5:after,
+h5::after,
+h5:after {
+    content: none !important;
+    display: none !important;
+    border: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
 }
